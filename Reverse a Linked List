@@ -1,0 +1,39 @@
+Iterative solution 
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* temp = NULL;
+        while(curr != NULL){
+            temp = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+};
+
+
+
+
+??recursive Solution 
+
+class Solution {
+public:
+    ListNode* reverse(ListNode* &head){
+        if(head == NULL|| head -> next == NULL)
+        return head;
+    
+        ListNode* head1 = reverse(head -> next); will reverse and set head on last node. 
+        head -> next -> next = head; //(1,2,3,4,5), this will point 2 with 1.
+        head -> next = NULL; // this will point 1 will null
+        return head1;
+    }
+
+    ListNode* reverseList(ListNode* head) {
+        return reverse(head);
+    }
+};
