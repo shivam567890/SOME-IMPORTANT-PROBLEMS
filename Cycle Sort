@@ -1,0 +1,30 @@
+
+
+https://leetcode.com/problems/missing-number/
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int i=0;
+        while(i<n){   
+            int pos= nums[i];   
+            if(pos==n){i++;}
+            else if(nums[i]!=nums[pos]){
+                swap(nums[i],nums[pos]);
+            }else{
+                i++;
+            }
+        } 
+        i=0;        
+        for(int i=0;i<n;i++){
+            if(nums[i]!=i){return i;}
+        }
+        return n;
+    }
+};
+
+
+
+
+https://leetcode.com/discuss/study-guide/1902662/cyclic-sort-very-important-and-less-known-pattern
