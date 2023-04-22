@@ -1,0 +1,64 @@
+
+
+
+https://leetcode.com/problems/binary-subarrays-with-sum/
+
+
+// Approach-1
+
+class Solution {
+public:
+
+   int atmax(vector<int>& nums, int goal){
+       if(goal<0){return 0;}
+       int ans=0, lo=0;
+       int sm=0;
+       for(int i=0;i<nums.size();i++){
+             sm+=nums[i];
+
+             while(sm>goal){
+                 sm-=nums[lo];
+                 lo++;
+             }
+        ans+=(i-lo+1);
+       }
+       return ans;
+   }
+
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        
+  
+    //  at max jitna ban sakta hai goal-1 se + (total exectly kitne goal se banta hai )  vo == hoga at max kitna goal se ban sakta hai .
+
+     //  goal =2 , mtlb jitna at max 1 se jo subarray banegi  usme add krdu jitna exectly 2 se banega to vo == at max jitna 2 se banega to 
+    // at max(2)- atmax(1)= exectly kitna 2 se banega mil jyega 
+return atmax(nums,goal)-atmax(nums,goal-1);
+    }
+};
+
+
+//Approch -2
+
+
+
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        
+  unordered_map<int, int>mp;
+
+  mp[0]=1;
+  int sm=0;
+   int ans =0;
+  for(int i=0;i<nums.size();i++){
+   sm+=nums[i];
+
+   if(mp[sm-goal]){
+       ans+=mp[sm-goal];
+   }
+
+   mp[sm]++;
+  }
+return ans;
+    }
+};
