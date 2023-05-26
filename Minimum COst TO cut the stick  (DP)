@@ -1,0 +1,29 @@
+It is based on unique time of DP trick.
+It is just like Palindrome Partitioning.
+
+
+https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+
+
+
+class Solution {
+public:
+
+        int fn(int i, int j,vector<int>& cuts,int start, int end,vector<vector<int>>&dp){
+              if(i>j){return 0;}
+              if(dp[i][j]!=-1){return dp[i][j];}
+               int cost=INT_MAX;
+              for(int k=i;k<=j;k++){
+             int cut=(end-start);
+    cut+=fn(i,k-1,cuts,start,cuts[k],dp)+ fn(k+1,j,cuts,cuts[k],end,dp); 
+                  cost= min(cost, cut);
+              }
+              return dp[i][j]=cost;
+        }
+    int minCost(int n, vector<int>& cuts) {
+        int l=cuts.size()+1;
+          vector<vector<int>>dp(l,vector<int>(l,-1));
+         sort(cuts.begin(),cuts.end());
+      return  fn(0,cuts.size()-1,cuts,0,n,dp);
+    }
+};
