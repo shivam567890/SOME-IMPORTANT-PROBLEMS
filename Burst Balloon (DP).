@@ -1,0 +1,49 @@
+https://leetcode.com/problems/burst-balloons/
+// Like Palindrome Partitioning
+
+
+class Solution {
+public:
+
+
+     int fn(int i, int j ,vector<int>&nums,vector<vector<int>>dp){
+
+         if(i>j){return 0;}
+
+         if(dp[i][j]!=-1){return dp[i][j];}
+
+         int cost=0;
+
+
+         for(int k=i;k<=j;k++){
+int burst=nums[k]*nums[i-1]*nums[j+1]+fn(i,k-1,nums,dp)+fn(k+1,j,nums,dp);
+             cost=max(cost,burst);
+         }
+         return dp[i][j]=cost;
+
+     }
+    int maxCoins(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>dp(n+2,vector<int>(n+2,0));
+         nums.insert(nums.begin(),1);
+          nums.push_back(1);
+        // return fn(1,n,nums,dp);
+
+
+        for(int i=n;i>=1;i--){
+
+            for(int j=1;j<=n;j++){
+                if(i>j){continue;}
+                int cost=0;
+         for(int k=i;k<=j;k++){
+int burst=nums[k]*nums[i-1]*nums[j+1]+dp[i][k-1]+dp[k+1][j];
+             cost=max(cost,burst);
+         }
+         dp[i][j]=cost;
+            }
+        }
+
+
+        return dp[1][n];
+    }
+};
