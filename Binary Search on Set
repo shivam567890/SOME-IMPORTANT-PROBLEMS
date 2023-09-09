@@ -1,0 +1,16 @@
+int binary(int l,int r,int t)
+{
+      while(l < = r)
+      {
+           int mid=(l+r)/2;
+           set<int> iterrator it= s.begin();
+           advance(it,mid);
+           if(*it==t)
+           return mid;
+           else if(*it > t)
+           r=mid-1;
+           else
+           l=mid+1;
+      }
+   return -1;
+}
