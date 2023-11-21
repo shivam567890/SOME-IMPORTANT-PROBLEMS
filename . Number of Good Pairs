@@ -1,0 +1,27 @@
+
+Given an array of integers nums, return the number of good pairs.
+
+A pair (i, j) is called good if nums[i] == nums[j] and i < j.
+
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        unordered_map<int,int>mp;
+
+              int n=nums.size();
+              int ans=0;
+             for(int i=0;i<n;i++){
+                   
+                   if(mp.count(nums[i])==0){
+                       mp[nums[i]]=1;
+                   }else{
+                        ans+=mp[nums[i]];
+                       mp[nums[i]]++;
+                      
+                   }
+             }
+
+             return ans;
+    }
+};
